@@ -10,7 +10,7 @@
 
 </div>
 <div>
-    <table border="1">
+    <table border="3">
         <thead>
         <tr>
             <th>ID</th>
@@ -20,13 +20,13 @@
 
         </thead>
         <tbody>
-        { % for row in cls_list %}
+        {% for row in cls_list %}
             <tr>
                 <td>
                     {{  row.id }}
                 </td>
                 <td>
-                    {{  row.name  }}
+                    {{  row.title  }}
                 </td>
                 <td>
                     <a href="/del_classes.html?nid={{  row.id }}">删除</a>
@@ -34,9 +34,10 @@
                     <a href="/edit_classes.html?nid={{  row.id }}">编辑</a>
                 </td>
             </tr>
-        { % end for% }
+        {% endfor %}
         </tbody>
-    </table>
+
+</table>
 </div>
 </body>
 </html>

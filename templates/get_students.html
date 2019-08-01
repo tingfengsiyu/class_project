@@ -15,28 +15,33 @@
         <tr>
             <th>ID</th>
             <th>名称</th>
+            <th>班级名称</th>
             <th>操作</th>
         </tr>
-
         </thead>
         <tbody>
-        { % for row in cls_list %}
+        {% for row in row_list %}
             <tr>
                 <td>
-                    {{  row.id }}
+                    {{ row.id }}
                 </td>
                 <td>
-                    {{  row.name  }}
+                    {{ row.username }}
                 </td>
                 <td>
-                    <a href="/del_students.html?nid={{  row.id }}">删除</a>
+                    {{ row.cs.title }}
+                </td>
+                <td>
+                    <a href="/del_students.html?nid={{ row.id }}">删除</a>
                     |
-                    <a href="/edit_classes.html?nid={{  row.id }}">编辑</a>
+                    <a href="/edit_students.html?nid={{ row.id }}">编辑</a>
                 </td>
             </tr>
-        { % end for% }
+        {% endfor %}
         </tbody>
-    </table>
+
+
+</table>
 </div>
 </body>
 </html>

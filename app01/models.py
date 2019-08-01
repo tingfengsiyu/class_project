@@ -1,5 +1,6 @@
 from django.db import models
-
+# from class_ project import models
+#from app01 import models
 class Classses(models.Model):
     '''
     班级表
