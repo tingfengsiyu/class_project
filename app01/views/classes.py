@@ -2,8 +2,9 @@ from django.shortcuts import  render
 from django.shortcuts import  redirect
 # from class_project import models
 from app01 import models
-def get_classes(request):
+def get_classesss(request):
     cls_list = models.Classses.objects.all()
+    print(type(cls_list))
     return render(request,'get_classes.html',{'cls_list': cls_list})
 
 def add_classes(request):
