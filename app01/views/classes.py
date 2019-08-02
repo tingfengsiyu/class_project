@@ -1,6 +1,5 @@
 from django.shortcuts import  render
 from django.shortcuts import  redirect
-# from class_project import models
 from app01 import models
 def get_classesss(request):
     cls_list = models.Classses.objects.all()
@@ -25,8 +24,8 @@ def edit_classes(request):
     if request.method == 'GET':
         nid = request.GET.get('nid')
         obj = models.Classses.objects.filter(id=nid).first()
-
         return render(request,'edit_classes.html',{'obj':obj})
+
     elif request.method == 'POST':
         print(request.POST)
         nid = request.GET.get('nid')

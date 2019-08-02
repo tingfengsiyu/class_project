@@ -4,14 +4,15 @@ from app01 import models
 
 
 def get_studentssss(request):
-    stu_list = models.Student.objects.first()
-    print(type(stu_list))
-    print(stu_list.id)
+    stu_list = models.Student.objects.all()
+    for row in stu_list:
+        print(row.id,row.username)
+    print(request.GET)
     return render(request,'get_students.html',{'stu_list ': stu_list })
 
 def add_students(request):
     if request.method == 'GET':
-        cs_list = models.Classses.objects.all()
+        cs_list = models.Student.objects.all()
         # for row in cs_list:
         #   print(row.id,row.title)
         return render(request, 'add_students.html', {'cs_list': cs_list})

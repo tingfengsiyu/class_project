@@ -19,16 +19,17 @@ from django.contrib import admin
 from django.conf.urls import url
 from app01.views import classes
 from app01.views import students
-from django.views import View
+from app01.views import get2
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^get_classesss.html$', classes.get_classesss),
+    url(r'^classes.html$', classes.get_classesss),
     url(r'^add_classes.html$', classes.add_classes),
     url(r'^del_classes.html$', classes.del_classes),
     url(r'^edit_classes.html$', classes.edit_classes),
-    url(r'^get_students.html$', students.get_studentssss),
-    url(r'^add_students.html$', students.add_students),
-    url(r'^del_students.html$', students.del_students),
-    url(r'^edit_students.html$', students.edit_students),
+    #url(r'^get_students.html$', students.get_studentssss),
+    url(r'^add_students.html$', get2.add_students),
+    url(r'^del_students.html$', get2.del_students),
+    url(r'^edit_students.html$', get2.edit_students),
+    url(r'^get.html$',get2.students)
 ]

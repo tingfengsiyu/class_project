@@ -15,11 +15,11 @@
     <p>
     <select name="cs">
         {% for row in cs_list %}
-         <option  value="{{ row.id }}"> {{ row.title }}</option>
+         <option  value="{{ row.cs.id }}"> {{ row.cs.title }}</option>
         {% endfor %}
 
     </select></p>
-        <input type="submit" />提交
+        <input type="submit" />
 
     </form>
 </body>
