@@ -40,3 +40,11 @@ def del_students(request):
 
 def edit_students(request):
     return redirect('/get_students.html')
+
+'''
+######多对多
+models.Teachers.objects.create(name='luofeng')
+models.Teachers.objects.create(name='luofeng1')
+models.Teachers.objects.create(name='luofeng2')
+models.Teachers.objects.create(name='luofeng3')
+'''
