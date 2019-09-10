@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .vtn{
+            display: inline-block;
+            padding: 5px 15px;
+            background: aqua;
+            color: #000;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <input placeholder="用户名" type="text" id="username"/>
+    <input placeholder="密码" type="password" id="password"/>
+    <div class="vtn" onclick="submitForm();">提交</div>
+</div>
+<div>
+<input placeholder="数字" type="text" id="i1"/>
+    +
+    <input placeholder="数字" type="text" id="i2"/>
+    <div class="vtn" onclick="sum();">等于</div>
+    <input placeholder="和" type="text" id="i3"/>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+
+<script>
+    function submitForm(){
+        var u = $('#username').val();
+        var p = $('#password').val();
+        console.log(u,p);
+        <!--提交字符串124 3434 -->
+        $.ajax({
+            url: '/ajax2.html',
+            type: 'GET',
+            data:{username:u,password:p},
+            success:function (arg) {
+                console.log(arg);
+            }
+        })
+    }
+
+    function sum(){
+        var v1 =$('#i1').val();
+        var v2 =$('#i2').val();
+        $.ajax({
+            url:'/ajax3.html',
+            type:'POST',
+            data: {'v1':v1,"v2":v2},
+            success:function (arg) {
+                $('#i3').val(arg);
+                <!---获取i3的值,arg就是回调函数相应参数的值，这里是i3的值-->
+                //window.location.reload();
+                //js页面主动刷新
+
+                //console.log(arg);
+            }
+        })
+    }
+</script>
+</body>
+</html>
