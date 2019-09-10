@@ -3,6 +3,7 @@ from django.shortcuts import  redirect
 from app01 import models
 def get_classesss(request):
     cls_list = models.Classses.objects.all()
+
     """
     for obj in cls_list:
         '''多对多查询
@@ -33,10 +34,11 @@ def get_classesss(request):
     #obj.sss.add(2)      #反向查找默认使用set，即表名然后_set，如果在多对多关系创建时，添加了m = models.ManyToManyField("Teachers",related_name='sss')，那么就可以直接使用sss，无需set
     obj.sss.set([1,2])  #该删除的删除，如果有不动，删除  老师id为2，而后  班级id为1和2的之外的
     """
+    '''
     #v = models.Classses.objects.all().values('id','title','m','m__name')
     v= models.Teachers.objects.all().values('name','sss__student')
     print(v)
-    '''
+    
     models.Classses.objects.all().values('id','title')
     <QuerySet [{'id': 1, 'title': '1班'}, {'id': 2, 'title': '2班'}, {'id': 3, 'title': '3班'}]>
     
@@ -50,6 +52,8 @@ def get_classesss(request):
     models.Teachers.objects.all().values('name','sss__student')
     {'name': 'luofeng', 'sss__student': 8}, {'name': 'luofeng', 'sss__student': 9}, {'name': 'luofeng1', 'sss__student': 8}
     '''
+    for item in cls_list:
+        print(item.id,item.title,item.m.all())
     return render(request,'get_classes.html',{'cls_list': cls_list})
 
 def add_classes(request):
@@ -77,4 +81,39 @@ def edit_classes(request):
         nid = request.GET.get('nid')
         title = request.POST.get('title')
         models.Classses.objects.filter(id=nid).update(title=title)
+        return redirect('/classes.html')
+
+def set_teacher(request):
+    if request.method == 'GET':
+        nid = request.GET.get('nid')
+        #获取班级对象
+        cls_obj = models.Classses.objects.filter(id=nid).first()
+        #test=models.Classses.objects.filter(id=nid).values('id','title')
+        #print(test)
+        cls_teacher_list = cls_obj.m.all().values_list('id','name')
+        id_list=list(zip(*cls_teacher_list))[0] if  list(zip(*cls_teacher_list)) else []
+        #如果有相应值，则会返回id，否则空
+
+        #teacher= models.Teachers.objects.filter(id=nid).values('id','name')
+        #print(teacher)
+        print('Teacher---->>>>>>',cls_teacher_list)
+        all_teacher_list = models.Teachers.objects.all()
+
+
+        return render(request,
+                      'set_teacher.html',
+                      {
+                          'id_List': id_list,
+                          'all_teacher_list': all_teacher_list,
+                          'nid' : nid,
+
+                       })
+    elif request.method == 'POST':
+        nid = request.GET.get('nid')
+        ids = request.POST.getlist('teacher_ids')
+        obj = models.Classses.objects.filter(id=nid).first()
+        obj.m.set(nid)
+
+        print('当前班级id',nid,'分配老师ID',ids)
+
         return redirect('/classes.html')
