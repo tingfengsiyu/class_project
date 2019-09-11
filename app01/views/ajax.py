@@ -24,8 +24,11 @@ from app01 import models
 def ajax4(request):
     nid = request.GET.get('nid')
     msg='成功'
+    print(nid)
     try:
-        models.Student.objects.filter(id=nid).first()
+        models.Student.objects.filter(id=nid).first().delete()
+
+
     except Exception as e:
         msg=str(e)
     return HttpResponse(msg)

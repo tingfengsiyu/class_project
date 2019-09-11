@@ -44,15 +44,15 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
     function  removeStudent(ths){
-        var nid= $(ths).parent().attr('nid');
-        //获取ths 是a标签，parent 获取他的父标签，且获取到nid的值
+        var nid= $(ths).parent().parent().attr('nid');
+        //获取ths 是a标签，parent 返回被选元素的父元素，这里是td，再找一次父元素，就是tr，且获取到nid的值
         $.ajax({
             url:'/ajax4.html',
             type:'GET',
             data:{nid:nid},
             success:function (arg) {
                 if (arg == '成功') {
-                    $(ths).parent().remove();
+                    $(ths).parent().parent().remove();
                     //window.location.reload();  刷新该页面
                 } else {
                     alert(arg);
