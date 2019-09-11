@@ -29,3 +29,5 @@ def ajax4(request):
     except Exception as e:
         msg=str(e)
     return HttpResponse(msg)
+
+

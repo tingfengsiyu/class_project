@@ -117,3 +117,4 @@ def set_teacher(request):
         print('当前班级id',nid,'分配老师ID',ids)
 
         return redirect('/classes.html')
+
