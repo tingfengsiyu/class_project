@@ -51,6 +51,7 @@
             type:'GET',
             data:{nid:nid},
             success:function (arg) {
+                // 回调函数，成功就怎么样
                 if (arg == '成功') {
                     $(ths).parent().parent().remove();
                     //window.location.reload();  刷新该页面
