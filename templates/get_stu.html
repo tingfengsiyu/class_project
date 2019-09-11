@@ -18,10 +18,11 @@
     <th>性别</th>
     <th>操作</th>
 </tr>
-</thread>
+
 <tbody>
-<tr>
+
 {%  for row in  cls %}
+    <tr nid="{{  row.id  }}">
     <td>{{  row.id }}</td>
     <td>{{ row.username }}</td>
     <td>{{  row.age }}</td>
@@ -29,11 +30,37 @@
     <td>
         <a href="/del_students.html?nid={{ row.id }}">删除</a>
         |
+        <a onclick="removeStudent(this);"  href="javascript: void(0);">ajax删除</a>
+        <!-- this 指当前元素，javascript: void(0); 代表href链接中为空，也就是该链接没有做任何事情 -->
+        |
         <a href="/edit_students.html?nid={{ row.id }}">编辑</a>
     </td>
 </tr>
 {%  endfor %}
 </tbody>
+</thread>
 </table>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    function  removeStudent(ths){
+        var nid= $(ths).parent().attr('nid');
+        //获取ths 是a标签，parent 获取他的父标签，且获取到nid的值
+        $.ajax({
+            url:'/ajax4.html',
+            type:'GET',
+            data:{nid:nid},
+            success:function (arg) {
+                if (arg == '成功') {
+                    $(ths).parent().remove();
+                    //window.location.reload();  刷新该页面
+                } else {
+                    alert(arg);
+                }
+            }
+        })
+    }
+
+</script>
 </body>
 </html>

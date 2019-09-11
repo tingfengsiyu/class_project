@@ -20,3 +20,12 @@ def ajax3(request):
     except Exception as e:
         v3='输入格式错误'
     return HttpResponse(v3)
+from app01 import models
+def ajax4(request):
+    nid = request.GET.get('nid')
+    msg='成功'
+    try:
+        models.Student.objects.filter(id=nid).first()
+    except Exception as e:
+        msg=str(e)
+    return HttpResponse(msg)

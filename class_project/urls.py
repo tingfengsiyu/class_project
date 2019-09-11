@@ -37,4 +37,5 @@ urlpatterns = [
     url(r'^ajax_students.html$', ajax.edit_students),
     url(r'^ajax2.html$', ajax.ajax2),
     url(r'^ajax3.html$', ajax.ajax3),
+    url(r'^ajax4.html$', ajax.ajax4),
 ]
